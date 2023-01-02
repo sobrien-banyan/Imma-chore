@@ -6,7 +6,7 @@
 ## A project that is a combined effort of three like-minded individuals
 
 ## Devs:
-Amnada Testerman, Sean O'Brien, Christopher Cialone
+Amanda Testerman, Sean O'Brien, Christopher Cialone
 
 ## Installation:
 1. Clone the repo to your computer
