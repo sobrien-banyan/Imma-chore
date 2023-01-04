@@ -14,11 +14,11 @@ class HomeView(View):
             context={}
         )
 class ParentView():
-    def get(self. request, parent_id):
+    def get(self, request, parent_id):
         parent = Parent.object.all()
         # kids = Kid.object.all()
         # kid_form = KidForm()
-        html_data{
+        html_data = {
             "parent" : parent
         }
         

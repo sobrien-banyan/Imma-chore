@@ -9,15 +9,15 @@ class Parent(models.Model):
 
 
 
-
-
-
-
-
-class Kid(model.Model):
-    parent = model.ForeignKey()
+class Chore(models.Model):
     name = models.CharField(max_length=35)
-    allowance_earned = models.IntegerField()
+    descriotion = models.CharField(max_length=35)
+    payout = models.IntegerField(blank=True, null=True)
+    day_of_the_week = models.DateTimeField()
+    is_complete = models.BooleanField(default=False)
 
-
-class Chore(model.Model):
+class Kid(models.Model):
+    parent = models.ForeignKey(Parent, on_delete = models.CASCADE)
+    name = models.CharField(max_length=35)
+    allowance_earned = models.IntegerField(blank=True, null=True)
+    chore = models.ManyToManyField(Chore)
