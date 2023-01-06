@@ -16,4 +16,4 @@ class KidForm(ModelForm):
 class ChoreForm(ModelForm):
     class Meta:
         model = Chore
-        fields = ['name', 'description', 'payout', 'day_of_the_week','is_complete']
+        fields = ['name', 'description', 'payout']
