@@ -4,6 +4,11 @@ from django.db import migrations, models
 import django.db.models.deletion
 
 
+def parent_name(apps,schema_editor ):
+    Parent = apps.get_model('imma_chore_app', 'Parent')
+    parent.name =  "Dad"
+    parent.save()
+
 class Migration(migrations.Migration):
 
     dependencies = [

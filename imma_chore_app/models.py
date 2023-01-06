@@ -11,9 +11,9 @@ class Parent(models.Model):
 
 class Chore(models.Model):
     name = models.CharField(max_length=35)
-    descriotion = models.CharField(max_length=35)
+    description = models.CharField(max_length=35)
     payout = models.IntegerField(blank=True, null=True)
-    day_of_the_week = models.DateTimeField()
+    day_of_the_week = models.CharField(max_length=35)
     is_complete = models.BooleanField(default=False)
 
 class Kid(models.Model):

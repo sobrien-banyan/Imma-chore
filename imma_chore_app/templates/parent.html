@@ -7,17 +7,30 @@
     <title>Parent</title>
 </head>
 <body>
+    <!-- <h1>Welcome {{ parent.id }} </h1> -->
+    <h1>Lets get started!</h1>
+    <form method="POST">
 
-    <form class="needs-validation" novalidate="">
-        <label for="firstName" class="form-label">Kid's name</label>
-        <input type="text" class="form-control" id="kids_name" placeholder="" value="" required="">
-        <button class="w-100 btn btn-primary btn-lg" type="submit">Create Kid</button>
+        {%  csrf_token  %}
+        {{  kid_form  }}
+
+        <input type="submit" name="add" value="Add Child"/>
+
+       
     </form>
+    <ul> 
+    {%  for kid in kid_list %}
+        <li>{{  kid.name }} </li>
+    {%  endfor %}
 
 
-
-
-
-   
+    </ul>
+    <h1>Create a Chore for this Kid</h1>
+    <form method=POST>
+    {%  csrf_token  %}
+    {{  chore_form  }}
+    <input type="submit" name="add" value="Add chore to Kid">
+   </form>
+   <h1>{{ parent_id }}</h1>
 </body>
 </html>
