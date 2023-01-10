@@ -4,20 +4,73 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="index.js" defer></script>
     <title>Parent</title>
 </head>
 <body>
+    <!-- <h1>Welcome {{ parent.id }} </h1> -->
+    <h1>Lets get started!</h1>
+    <form method="POST">
 
-    <form class="needs-validation" novalidate="">
-        <label for="firstName" class="form-label">Kid's name</label>
-        <input type="text" class="form-control" id="kids_name" placeholder="" value="" required="">
-        <button class="w-100 btn btn-primary btn-lg" type="submit">Create Kid</button>
+        {%  csrf_token  %}
+        {{  kid_form  }}
+
+        <input type="submit" name="add_child" value="Add child"/>
+
+       
     </form>
+    <ul> 
+    {%  for kid in kid_list %}
+        {% if selected_kid == kid.id %}
+        <li><a class="text-black" href="/parent/{{ parent_id }}/{{ kid.id }}/{{ selected_chore_id }}">{{  kid.name }} {{ kid.id }}</a></li>
+        {% else %}
+        <li><a href="/parent/{{ parent_id }}/{{ kid.id }}/{{ selected_chore_id }}">{{  kid.name }} </a></li>
+        {% endif %}
+    {%  endfor %}
 
 
+    </ul>
+    <hr/>
+    <h1>Create a Chore</h1>
+    <form method=POST>
+    {%  csrf_token  %}
+    {{  chore_form  }}
+    <input type="submit" name="create_chore" value="Create chore">
+   </form>
+   <ul> 
+    {%  for chore in chores %}
+        {% if selected_chore_id == chore.id %}
+        <li><a class="text-black" href="/parent/{{ parent_id }}/{{ selected_kid }}/{{ chore.id }}">{{  chore.name }} {{ chore.id }}</a></li>
+        {% else %}
+        <li><a href="/parent/{{ parent_id }}/{{ selected_kid }}/{{ chore.id }}">{{  chore.name }} </a></li>
+        {% endif %}
+    {%  endfor %}
+    </ul>
 
+    <h1>Assign chore to kid and add which day it will be completed</h1>
+    <form method=POST>
+    {%  csrf_token  %}
+    {{  kid_chore_form  }}
+    <!-- {{  kid_chore_form.days_of_the_week  }} -->
+    <!-- {{ days_of_the_week }} -->
+    <select name="day_of_the_week">
+        <option value="monday">Monday</option>
+        <option value="tuesday">Tuesday</option>
+        <option value="wednesday">Wednesday</option>
+        <option value="thursday">Thursday</option>
+        <option value="friday">Friday</option>
+        <option value="saturday">Saturday</option>
+        <option value="sunday">Sunday</option>
+    </select>
+    <input type="submit" name="assign_chore" value="Assign chore">
+   </form>
 
+   <ul>
+    {% for kid_chore in selected_kid_chores %}
+    <li>{{ kid_chore.kid.name }} {{ kid_chore.day_of_the_week }}    {{ kid_chore.chore.name }}   {{ kid_chore.chore.description }}</li>
+    {% endfor %}
+   </ul>
 
-   
 </body>
 </html>
