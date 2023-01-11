@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 
 from django.views import View
-from imma_chore_app.forms import ParentForm, KidForm, ChoreForm, Kid_ChoreForm
+from imma_chore_app.forms import ParentForm, KidForm, ChoreForm, Kid_ChoreForm, Kid_Chore_CompleteForm
 from imma_chore_app.models import Parent, Kid, Chore, Kid_Chore
 
 # Create your views here.
@@ -94,5 +94,32 @@ class ParentView(View):
         else: 
             return redirect(f'/parent/{parent_id}/{kid_id}/{chore_id}')
         
+class KidView(View):
 
 
+    def get(self, request, kid_id, chore_id):
+        kid_chore_complete_form = Kid_Chore_CompleteForm()
+        selected_kid_chores = Kid_Chore.objects.all().filter(kid_id=kid_id).select_related('chore')
+        html_data = {
+            'kid_id' : kid_id,
+            'selected_kid_chores': selected_kid_chores,
+            'kid_chore_complete_form': kid_chore_complete_form,
+            'first_chore_id': selected_kid_chores[0].id,
+        }
+
+
+        return render(
+            request = request,
+            template_name = 'kid.html',
+            context = html_data,
+        )
+
+    def post(self, request, kid_id, chore_id):
+        print(request.POST['is_complete'])
+        kid_chore = Kid_Chore.objects.get(id=chore_id)
+        kid_chore.is_complete = request.POST['is_complete']
+        kid_chore.save()
+        
+        
+        return redirect(f'/kid/{kid_id}/{kid_chore.id}')
+        
