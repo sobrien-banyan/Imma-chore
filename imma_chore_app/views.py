@@ -73,6 +73,7 @@ class ParentView(View):
         if 'add_child' in request.POST:
             saved_kid = KidForm(request.POST).save()
             saved_kid.parent_id = parent_id
+            saved_kid.allowance_earned = 0
             saved_kid.save()
 
             return redirect(f'/parent/{parent_id}/{kid_id}/{chore_id}')
@@ -119,7 +120,15 @@ class KidView(View):
         kid_chore = Kid_Chore.objects.get(id=chore_id)
         kid_chore.is_complete = request.POST['is_complete']
         kid_chore.save()
-        
-        
+
+          #adding functionality so that once a chore is done the amount that the chore is worth is addded to the allowance_earned field on that child in the database
+        Chores = Chore.objects.all()
+        for chore in Chores
+        if kid_chore.chore == chore_id:
+
+        amount_earned = chore.payout
+        kid_money = Kid.objects.get(id=kid_id)
+        kid_money.allowance_earned = amount_earned
+        kid_money.save()
         return redirect(f'/kid/{kid_id}/{kid_chore.id}')
         
