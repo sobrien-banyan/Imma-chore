@@ -8,7 +8,13 @@ from imma_chore_app.models import Parent, Kid, Chore, Kid_Chore
 # Create your views here.
 
 class HomeView(View):
+    '''Corresponds with index page and has two methods
+    get and post
+    '''
     def get(self, request):
+        '''handles intial request and returns index html
+        parent_form  - an instance of the correspnding
+        ParentForm class '''
 
         html_data = {
             'parent_form' : ParentForm(),
@@ -21,6 +27,9 @@ class HomeView(View):
         )
 
     def post(self, request):
+        '''takes care of the form submission from index
+        creates a new Parent object then redirects user to 
+        Parent Page'''
         parent_form = ParentForm(request.POST)
         parent = parent_form.save()
 
@@ -28,10 +37,13 @@ class HomeView(View):
 
 
 class ParentView(View):
-
+    '''This corresponds to the Parent page
+    two methods: get and post'''
     parent_object = {}
 
     def get(self, request, parent_id, kid_id, chore_id):
+        '''takes care of initial request, returns and 
+        html template and creates the dictionary html_data '''
         # parent = Parent.objects.all()
         # kids = Kid.object.all()
         # kid_form = KidForm()
@@ -54,14 +66,6 @@ class ParentView(View):
             'selected_kid_chores': selected_kid_chores,
         }
 
-        # html_data = {
-        #     "parent" : parent
-        # }
-        
-        # html_data = {
-        #     "kid_list" : kids,
-        #     "form" : kid_form
-        # }
 
         return render(
             request = request,
@@ -70,6 +74,8 @@ class ParentView(View):
         )
 
     def post(self, request, parent_id, kid_id, chore_id):
+        '''handles form submission from parent page
+        creates Kid and Chore and assigns Chore to Kid'''
         if 'add_child' in request.POST:
             saved_kid = KidForm(request.POST).save()
             saved_kid.parent_id = parent_id
@@ -95,9 +101,13 @@ class ParentView(View):
             return redirect(f'/parent/{parent_id}/{kid_id}/{chore_id}')
         
 class KidView(View):
-
+    '''takes care of the Kid page and has two methods
+    get and post'''
 
     def get(self, request, kid_id, chore_id):
+        '''handles initial request and returns the Kid html
+        creats the dictionary html_data{}
+        '''
         kid_chore_complete_form = Kid_Chore_CompleteForm()
         selected_kid_chores = Kid_Chore.objects.all().filter(kid_id=kid_id).select_related('chore')
         html_data = {
@@ -115,6 +125,8 @@ class KidView(View):
         )
 
     def post(self, request, kid_id, chore_id):
+        '''handles form submissions from Kid page
+        and marks chore as complete based on data from the form'''
         print(request.POST['is_complete'])
         kid_chore = Kid_Chore.objects.get(id=chore_id)
         kid_chore.is_complete = request.POST['is_complete']
