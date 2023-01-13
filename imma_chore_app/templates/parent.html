@@ -30,7 +30,9 @@
     </header>
     <div class="album py-5 bg-light">
         <div class="container">
-            <h1>Lets get started!</h1>
+            <h1>Hi {{ parent.name }}, lets get started!</h1>
+            <br/>
+            <h2>Create or select a kid</h2>
             <form method="POST">
 
                 {% csrf_token %}
@@ -44,10 +46,10 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 ">
                 {% for kid in kid_list %}
                 {% if selected_kid == kid.id %}
-                <a class="card shadow-sm m-2" href="/parent/{{ parent_id }}/{{ kid.id }}/{{ selected_chore_id }}">
+                <a class="card shadow-sm m-2" href="/parent/{{ parent.id }}/{{ kid.id }}/{{ selected_chore_id }}">
                     <div class="btn btn-primary my-2"> {{ kid.name }} </div></a>
                 {% else %}
-                <a class="card shadow-sm m-2" href="/parent/{{ parent_id }}/{{ kid.id }}/{{ selected_chore_id }}">
+                <a class="card shadow-sm m-2" href="/parent/{{ parent.id }}/{{ kid.id }}/{{ selected_chore_id }}">
                     <div class="btn my-2"> {{ kid.name }} </div> </a>
                 {% endif %}
                 {% endfor %}
@@ -55,7 +57,7 @@
 
                 </div>
             <hr />
-            <h1>Create a Chore</h1>
+            <h2>Create or select a Chore</h2>
             <form method=POST>
                 {% csrf_token %}
                 {{ chore_form }}
@@ -66,11 +68,11 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 ">
                 {% for chore in chores %}
                 {% if selected_chore_id == chore.id %}
-                <a class="card shadow-sm m-2" href="/parent/{{ parent_id }}/{{ selected_kid }}/{{ chore.id }}">
+                <a class="card shadow-sm m-2" href="/parent/{{ parent.id }}/{{ selected_kid }}/{{ chore.id }}">
                     <div class="btn btn-primary my-2"> {{ chore.name }} </div>
                 </a>
                 {% else %}
-                <a class="card shadow-sm m-2" href="/parent/{{ parent_id }}/{{ selected_kid }}/{{ chore.id }}">
+                <a class="card shadow-sm m-2" href="/parent/{{ parent.id }}/{{ selected_kid }}/{{ chore.id }}">
                     <div class="btn my-2">{{ chore.name }}</div>
                 </a>
                 {% endif %}
