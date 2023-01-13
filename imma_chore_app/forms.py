@@ -20,9 +20,5 @@ class ChoreForm(ModelForm):
 class Kid_ChoreForm(ModelForm):
     class Meta:
         model = Kid_Chore
-        exclude=('day_of_the_week', 'is_complete', 'kid', 'chore')
-class Kid_Chore_CompleteForm(ModelForm):
-    class Meta:
-        model = Kid_Chore
-       # fields = ['is_complete']
-        exclude=('day_of_the_week', 'is_complete', 'kid', 'chore')
+        exclude=('day_of_the_week', 'is_complete', 'kid', 'chore', 'parent')
+
