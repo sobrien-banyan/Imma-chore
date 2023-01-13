@@ -56,6 +56,7 @@ class ParentView(View):
     parent_object = {}
 
     def get(self, request, parent_id, kid_id, chore_id):
+        parent = Parent.objects.get(id=parent_id)
         kids = Kid.objects.all().filter(parent_id=parent_id)
         chores = Chore.objects.all().filter(parent_id = parent_id)
         selected_kid_chores = Kid_Chore.objects.all().filter(kid_id=kid_id).filter(parent_id=parent_id).select_related('chore')
@@ -68,7 +69,7 @@ class ParentView(View):
             'kid_form' : kid_form,
             'chore_form' : chore_form,
             'kid_chore_form': kid_chore_form,
-            'parent_id' : parent_id,
+            'parent' : parent,
             'selected_kid' : kid_id,
             'chores' : chores,
             'selected_chore_id': chore_id,
@@ -113,6 +114,16 @@ class ParentView(View):
             Kid_Chore.objects.get(id = kid_chore_id).delete()
 
             return redirect(f'/parent/{parent_id}/{kid_id}/{chore_id}')
+
+        elif 'delete_kid' in request.POST:
+            selected_kid_id = request.POST['kid_id']
+            Kid.objects.get(id = selected_kid_id).delete()
+            kids = Kid.objects.all().filter(parent_id=parent_id)
+            kid_id_path_param = 0
+            if len(kids) > 0:
+                kid_id_path_param = kids[0].id
+                
+            return redirect(f'/parent/{parent_id}/{kid_id_path_param}/{chore_id}')
         else: 
             return redirect(f'/parent/{parent_id}/{kid_id}/{chore_id}')
         

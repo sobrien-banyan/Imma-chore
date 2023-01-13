@@ -30,7 +30,9 @@
     </header>
     <div class="album py-5 bg-light">
         <div class="container">
-            <h1>Lets get started!</h1>
+            <h1>Hi {{ parent.name }}, lets get started!</h1>
+            <br/>
+            <h2>Create or select a kid</h2>
             <form method="POST">
 
                 {% csrf_token %}
@@ -40,38 +42,55 @@
 
 
             </form>
-            <br/>
-            <ul>
+            <br />
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 ">
                 {% for kid in kid_list %}
                 {% if selected_kid == kid.id %}
-                <li><a class="text-black" href="/parent/{{ parent_id }}/{{ kid.id }}/{{ selected_chore_id }}">
-                       {{ kid.name }} {{ kid.id }}</a></li>
+                <div class="card shadow-sm m-2">
+                <a class="btn btn-primary my-2" href="/parent/{{ parent.id }}/{{ kid.id }}/{{ selected_chore_id }}">
+                    <div > {{ kid.name }} </div></a>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <form method=POST>
+                                {% csrf_token %}
+
+                                <input hidden type="number" name="kid_id" value="{{ selected_kid }}">
+                                <input class="btn btn-primary my-2" type="submit" name="delete_kid" value="Delete">
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 {% else %}
-                <li><a href="/parent/{{ parent_id }}/{{ kid.id }}/{{ selected_chore_id }}">{{ kid.name }} </a></li>
+                <a class="card shadow-sm m-2" href="/parent/{{ parent.id }}/{{ kid.id }}/{{ selected_chore_id }}">
+                    <div class="btn my-2"> {{ kid.name }} </div> </a>
                 {% endif %}
                 {% endfor %}
 
 
-            </ul>
+                </div>
             <hr />
-            <h1>Create a Chore</h1>
+            <h2>Create or select a Chore</h2>
             <form method=POST>
                 {% csrf_token %}
                 {{ chore_form }}
                 <input class="btn btn-primary my-2" type="submit" name="create_chore" value="Create chore">
             </form>
-            <br/>
-            <ul>
+            <br />
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 ">
                 {% for chore in chores %}
                 {% if selected_chore_id == chore.id %}
-                <li><a class="text-black" href="/parent/{{ parent_id }}/{{ selected_kid }}/{{ chore.id }}">
-                    {{ chore.name }} {{ chore.id }}</a></li>
+                <a class="card shadow-sm m-2" href="/parent/{{ parent.id }}/{{ selected_kid }}/{{ chore.id }}">
+                    <div class="btn btn-primary my-2"> {{ chore.name }} </div>
+                </a>
                 {% else %}
-                <li><a href="/parent/{{ parent_id }}/{{ selected_kid }}/{{ chore.id }}">{{ chore.name }} </a></li>
+                <a class="card shadow-sm m-2" href="/parent/{{ parent.id }}/{{ selected_kid }}/{{ chore.id }}">
+                    <div class="btn my-2">{{ chore.name }}</div>
+                </a>
                 {% endif %}
                 {% endfor %}
-            </ul>
-            <br/>
+            </div>
+            <br />
 
             <hr />
             <h1>Assign chore to kid and add which day it will be completed</h1>
@@ -90,7 +109,7 @@
                 </select>
                 <input class="btn btn-primary my-2" type="submit" name="assign_chore" value="Assign chore">
             </form>
-            <br/>
+            <br />
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
 
@@ -101,7 +120,7 @@
 
                     <div class="card-body">
                         <p class="card-text">Kid Name: {{ kid_chore.kid.name }}.</p>
-                        <p class="card-text">Date: {{ kid_chore.day_of_the_week }} </p>
+                        <p class="card-text">Day: {{ kid_chore.day_of_the_week }} </p>
                         <p class="card-text">Chore: {{ kid_chore.chore.name }} </p>
                         <p class="card-text">Description: {{ kid_chore.chore.description }}</p>
                         <p class="card-text">Is this chore complete? {{ kid_chore.is_complete }}</p>
