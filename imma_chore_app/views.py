@@ -114,6 +114,16 @@ class ParentView(View):
             Kid_Chore.objects.get(id = kid_chore_id).delete()
 
             return redirect(f'/parent/{parent_id}/{kid_id}/{chore_id}')
+
+        elif 'delete_kid' in request.POST:
+            selected_kid_id = request.POST['kid_id']
+            Kid.objects.get(id = selected_kid_id).delete()
+            kids = Kid.objects.all().filter(parent_id=parent_id)
+            kid_id_path_param = 0
+            if len(kids) > 0:
+                kid_id_path_param = kids[0].id
+                
+            return redirect(f'/parent/{parent_id}/{kid_id_path_param}/{chore_id}')
         else: 
             return redirect(f'/parent/{parent_id}/{kid_id}/{chore_id}')
         

@@ -46,8 +46,20 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 ">
                 {% for kid in kid_list %}
                 {% if selected_kid == kid.id %}
-                <a class="card shadow-sm m-2" href="/parent/{{ parent.id }}/{{ kid.id }}/{{ selected_chore_id }}">
-                    <div class="btn btn-primary my-2"> {{ kid.name }} </div></a>
+                <div class="card shadow-sm m-2">
+                <a class="btn btn-primary my-2" href="/parent/{{ parent.id }}/{{ kid.id }}/{{ selected_chore_id }}">
+                    <div > {{ kid.name }} </div></a>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <form method=POST>
+                                {% csrf_token %}
+
+                                <input hidden type="number" name="kid_id" value="{{ selected_kid }}">
+                                <input class="btn btn-primary my-2" type="submit" name="delete_kid" value="Delete">
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 {% else %}
                 <a class="card shadow-sm m-2" href="/parent/{{ parent.id }}/{{ kid.id }}/{{ selected_chore_id }}">
                     <div class="btn my-2"> {{ kid.name }} </div> </a>
