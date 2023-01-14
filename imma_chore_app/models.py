@@ -17,10 +17,12 @@ class Kid(models.Model):
     name = models.CharField(max_length=35)
     allowance_earned = models.IntegerField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    def get_chores(self):
+        return self.kid_chore_set.all()
 
 class Kid_Chore(models.Model):
     kid = models.ForeignKey(Kid, on_delete= models.CASCADE, null=True)
-    chore= models.ForeignKey(Chore, on_delete=models.DO_NOTHING, null=True)
+    chore = models.ForeignKey(Chore, on_delete=models.DO_NOTHING, null=True)
     day_of_the_week = models.CharField(max_length=12)
     is_complete = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

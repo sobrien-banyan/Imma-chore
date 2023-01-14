@@ -9,6 +9,8 @@
     <title>Kid</title>
 </head>
 <body>
+    <h1>Chore Time, {{ kid.name }} !! </h1>
+    <h3> You have earned: $ {{ kid_money }} , so far, lets see how much more you can earn this week!</h3>
     <div class="container">
         <div class="row">
           <div class="col-sm-8 col-md-7 py-4">
@@ -30,10 +32,10 @@
                 <div class="btn-group">
                     <form method=POST>
                         {%  csrf_token  %}
-                        {{  kid_chore_complete_form  }}
+                        {{  kid_chore_complete_form.as_div  }}
                       
                         
-                        <input type="submit" name="is_complete" value="True">
+                        <input type="submit" name="button" value="{{kid_chore.id}}">
                        </form>
                 </div>
                 <small class="text-muted">9 mins</small>
