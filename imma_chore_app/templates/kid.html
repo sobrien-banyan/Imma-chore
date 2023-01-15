@@ -37,9 +37,10 @@
       <h1>Hi! {{ kid.name }}</h1>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-
+        
         {% for kid_chore in selected_kid_chores %}
 
+        
           <div class="card shadow-sm">
 
             <div class="card-body">
@@ -48,20 +49,24 @@
               <p class="card-text">Description: {{ kid_chore.chore.description }}</p>
               <p class="card-text">Is this chore complete? {{ kid_chore.is_complete }}</p>
 
-
+                {% if kid_chore.is_complete == False  %}
+                
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <form method=POST>
                     {% csrf_token %}
                     {{ kid_chore_complete_form }}
-
+                    
                     <input hidden type="number" name="chore_number" value="{{ kid_chore.id }}">
+                    <input hidden type="number" name="chore_id" value="{{ kid_chore.chore_id}}">
                     <input class="btn btn-primary my-2" type="submit" name="is_complete" value="Complete?">
                   </form>
                 </div>
               </div>
+              {% endif %}
             </div>
           </div>
+        
         {% endfor %}
 
 
