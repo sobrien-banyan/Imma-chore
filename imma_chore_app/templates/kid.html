@@ -35,10 +35,10 @@
       <h1>Hi! {{ kid_name }}</h1>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-
+        
         {% for kid_chore in selected_kid_chores %}
 
-        <a href="/kid/{{kid_id}}/{{ kid_chore.id }}">
+        
           <div class="card shadow-sm">
 
             <div class="card-body">
@@ -47,7 +47,7 @@
               <p class="card-text">Description: {{ kid_chore.chore.description }}</p>
               <p class="card-text">Is this chore complete? {{ kid_chore.is_complete }}</p>
 
-                {% if kid_chore.complete == False %}
+                {% if kid_chore.is_complete == False  %}
                 
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -64,7 +64,7 @@
               {% endif %}
             </div>
           </div>
-        </a>
+        
         {% endfor %}
 
 
