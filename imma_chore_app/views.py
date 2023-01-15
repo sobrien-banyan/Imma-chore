@@ -172,16 +172,18 @@ class KidView(View):
             template_name = 'kid.html',
             context = html_data,
         )
+        pdb.set_trace()
 
     def post(self, request, kid_id):
+        
         if 'is_complete' in request.POST:
             kid_chore_id = request.POST['chore_number']
             chore_id = request.POST['chore_id']
             kid_chore = Kid_Chore.objects.get(id=kid_chore_id)
             payout = Chore.objects.get(id=chore_id).payout
             kid = Kid.objects.get(id=kid_id)
-            allowance_earned = kid.allowance_earned
-            kid.allowance_earned = allowance_earned + payout
+            kid.allowance_earned += payout
+            kid.save()
             kid_chore.is_complete = True
             kid_chore.save()
 

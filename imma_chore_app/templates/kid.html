@@ -47,19 +47,21 @@
               <p class="card-text">Description: {{ kid_chore.chore.description }}</p>
               <p class="card-text">Is this chore complete? {{ kid_chore.is_complete }}</p>
 
-
+                {% if kid_chore.complete == False %}
+                
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <form method=POST>
                     {% csrf_token %}
                     {{ kid_chore_complete_form }}
-
+                    
                     <input hidden type="number" name="chore_number" value="{{ kid_chore.id }}">
                     <input hidden type="number" name="chore_id" value="{{ kid_chore.chore_id}}">
                     <input class="btn btn-primary my-2" type="submit" name="is_complete" value="Complete?">
                   </form>
                 </div>
               </div>
+              {% endif %}
             </div>
           </div>
         </a>
