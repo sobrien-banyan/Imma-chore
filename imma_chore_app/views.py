@@ -60,10 +60,15 @@ class ParentView(View):
         kids = Kid.objects.all().filter(parent_id=parent_id)
         chores = Chore.objects.all().filter(parent_id = parent_id)
         selected_kid_chores = Kid_Chore.objects.all().filter(kid_id=kid_id).filter(parent_id=parent_id).select_related('chore')
-        print(selected_kid_chores)
+        kid_chores = Kid_Chore.objects.all().filter(parent_id = parent_id).filter(chore_id= chore_id)
         kid_form = KidForm()
         chore_form = ChoreForm()
         kid_chore_form = Kid_ChoreForm()
+
+        chore_ready_for_deletion = False
+        if len(kid_chores) == 0:
+            chore_ready_for_deletion = True
+
         html_data = {
             'kid_list' : kids,
             'kid_form' : kid_form,
@@ -74,6 +79,7 @@ class ParentView(View):
             'chores' : chores,
             'selected_chore_id': chore_id,
             'selected_kid_chores': selected_kid_chores,
+            'chore_ready_for_deletion': chore_ready_for_deletion,
         }
 
         return render(
@@ -109,11 +115,23 @@ class ParentView(View):
                 saved_kid_chore.save()
                 return redirect(f'/parent/{parent_id}/{kid_id}/{chore_id}')
 
-        elif 'delete' in request.POST:
+        elif 'delete_kid_chore' in request.POST:
             kid_chore_id = request.POST['chore_number']
             Kid_Chore.objects.get(id = kid_chore_id).delete()
 
             return redirect(f'/parent/{parent_id}/{kid_id}/{chore_id}')
+
+        elif 'delete_chore' in request.POST:
+            chore_id = request.POST['chore_id']
+            Chore.objects.get(id=chore_id).delete()
+
+            return redirect(f'/parent/{parent_id}/{kid_id}/{chore_id}')
+
+        elif 'delete_parent' in request.POST:
+            parent_id = request.POST['parent_id']
+            Parent.objects.get(id=parent_id).delete()
+
+            return redirect(f'/')
 
         elif 'delete_kid' in request.POST:
             selected_kid_id = request.POST['kid_id']
