@@ -152,7 +152,7 @@ class KidView(View):
     def get(self, request, kid_id):
         kid_chore_complete_form = Kid_ChoreForm()
         selected_kid_chores = Kid_Chore.objects.all().filter(kid_id=kid_id).select_related('chore')
-        kid_name = Kid.objects.get(id = kid_id).name
+        kid = Kid.objects.get(id = kid_id)
         first_chore_id = 1
 
         if len(selected_kid_chores) > 1:
@@ -160,7 +160,7 @@ class KidView(View):
 
         html_data = {
             'kid_id' : kid_id,
-            'kid_name' : kid_name,
+            'kid' : kid,
             'selected_kid_chores': selected_kid_chores,
             'kid_chore_complete_form': kid_chore_complete_form,
             'first_chore_id': first_chore_id,
