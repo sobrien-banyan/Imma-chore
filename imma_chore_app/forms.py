@@ -11,7 +11,7 @@ class KidForm(ModelForm):
         model = Kid
         fields = ['name']
     #not sure if all child elements are needed here:
-    #########
+    
     #also how are we going to auto populet allowance earned to 0
 class ChoreForm(ModelForm):
     class Meta:
@@ -20,4 +20,5 @@ class ChoreForm(ModelForm):
 class Kid_ChoreForm(ModelForm):
     class Meta:
         model = Kid_Chore
-        exclude=('day_of_the_week', 'is_complete', 'kid', 'chore')
+        exclude=('day_of_the_week', 'is_complete', 'kid', 'chore', 'parent')
+
