@@ -154,7 +154,7 @@ class KidView(View):
         selected_kid_chores = Kid_Chore.objects.all().filter(kid_id=kid_id).select_related('chore')
         kid_name = Kid.objects.get(id = kid_id).name
         first_chore_id = 1
-
+        allowance_earned = Kid.objects.get(id = kid_id).allowance_earned
         if len(selected_kid_chores) > 1:
             first_chore_id = selected_kid_chores[0].id
 
@@ -164,6 +164,7 @@ class KidView(View):
             'selected_kid_chores': selected_kid_chores,
             'kid_chore_complete_form': kid_chore_complete_form,
             'first_chore_id': first_chore_id,
+            'allowance_earned' : allowance_earned
         }
 
 
