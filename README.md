@@ -13,8 +13,10 @@ Amnada Testerman, Sean O'Brien, Christopher Cialone
 2. run `python3 venv venv`
 3. run `source venv/bin/activate` 
 4. run `pip install -r requirements.txt`
-5. run `python manage.py runserver`
-6. And go to `http://localhost:8000` or `http://127.0.0.1:8000/` in your favorite browser
+5. run `python manage.py makemigrations`
+6. run `python manage.py migrate`
+7. run `python manage.py runserver`
+8. And go to `http://localhost:8000` or `http://127.0.0.1:8000/` in your favorite browser
 
 ## How to use app:
 
