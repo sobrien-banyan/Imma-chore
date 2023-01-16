@@ -6,7 +6,11 @@
 ## A project that is a combined effort of three like-minded individuals
 
 ## Devs:
-Amnada Testerman, Sean O'Brien, Christopher Cialone
+Name:            Github Username:
+
+Amnada Testerman: amandaTesterman
+Sean O'Brien: sobrien-banyan
+Christopher Cialone: christopher-cialone
 
 ## Installation and run:
 1. Clone the repo to your computer
