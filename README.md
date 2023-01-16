@@ -6,7 +6,11 @@
 ## A project that is a combined effort of three like-minded individuals
 
 ## Devs:
-Amnada Testerman, Sean O'Brien, Christopher Cialone
+Name:            Github Username:
+
+Amanda Testerman: amandaTesterman
+Sean O'Brien: sobrien-banyan
+Christopher Cialone: christopher-cialone
 
 ## Installation and run:
 1. Clone the repo to your computer
@@ -39,4 +43,20 @@ The kid profile will need to be create by the parent. Kids can select their prof
 
 ### Kid page
 ![Kid page](./images/kid_page.png)
+
+### The app has the following views:
+* HomeView: displays a list of all parents and children and allows the user to create a new parent or select an existing parent to view their children and assigned chores.
+* ParentView: allows the user to add new children to the parent, create new tasks and assign them to children, and view the progress of each child's assigned tasks.
+
+### The app has the following models:
+* Parent: stores information about the parent such as name and email.
+* Kid: stores information about each child such as name and allowance earned.
+* Chore: stores information about each task such as name and reward.
+* Kid_Chore: stores information about the assignment of a task to a child such as the date the task was assigned and the date it was completed.
+
+### The app has the follwoing forms:
+* ParentForm: allows the user to create a new parent.
+* KidForm: allows the user to add a new child to a parent.
+* ChoreForm: allows the user to create a new task
+* Kid_ChoreForm: allows the user to assign a task to a child.
 
