@@ -7,6 +7,14 @@ a{
     text-decoration: none;
 }
 /* Home Page styling */
+html{
+    height: 100%;
+}
+#homePageBody{
+    min-height: 100vh;
+    overflow: auto;
+    
+}
 .pageBorderStyle{
     border: double 3px red;
 }
@@ -109,4 +117,32 @@ a{
     background-color: rgb(244, 244, 88);
     color:black;
     font-size: 1.25rem;
+}
+/* Kid page Styling */
+#kidPageBody{
+    background-color: rgb(35, 35, 35);
+}
+#allowanceEarned{
+    color: rgb(43, 176, 120)
+}
+#kidGreeting{
+    color: rgb(11, 156, 96);
+     /* text-shadow: 0 0 2px rgb(207, 60, 60), 0 0 2px rgb(207, 60, 60),0 0 2px rgb(207, 60, 60), 0 0 2px rgb(207, 60, 60);  */
+}
+#choreInfoDisplay{
+    background-color: rgb(12, 175, 216);
+    border: double 10px rgb(207, 60, 60);
+   
+}
+#completeBtn{
+    background-color: rgb(219, 177, 72);
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: rgb(56, 52, 52)
+
+}
+#tester{
+    width: 125px;
+    height: 100px;
+    background-color: azure;
 }
