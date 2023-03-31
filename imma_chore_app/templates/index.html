@@ -7,12 +7,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Imma-chore</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheet/index.css' %}"/>
+  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}"/>
 </head>
 
-<body>
+<body id="homePageBody">
 
   <header>
     <div class="navbar navbar-dark bg-dark shadow-sm">
@@ -58,15 +59,15 @@
     </div>
   </header>
 
-  <main>
+  <main class="pageBorderStyle">
 
 
 
-    <section class="py-5 text-center container">
+    <section  class="py-5 text-center container">
 
       
-      <h1 class="header">Imma-chore</h1>
-      <div class="mt-4 p-5 bg-primary text-white rounded">
+      <h1 id="siteTitle">Ima-chore</h1>
+      <div id='createParentDiv'class="mt-4 p-5  rounded">
         <h2>New parent?</h2>
         <h2>Please enter your name</h2>
         <form method="POST" action="{% url 'home' %}">
@@ -78,28 +79,28 @@
       </div>
       <br />
 
-      <h2 class="fw-light ">Parents</h2>
+      <h2 id='parentSectionTitle' class="fw-light ">Parents</h2>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 ">
 
           {% for parent in parents %}
-          <form class="card shadow-sm m-2" method="POST">
+          <form id='parentNameDisplay'class="card shadow-sm m-2" method="POST">
             {% csrf_token %}
             <input hidden type="number" name="selected_parent" value="{{ parent.id }}">
-            <input class="btn btn-primary my-2" type="submit" name="parent_name" value="{{ parent.name }}">
+            <input id='parentName' class="btn btn-primary my-2 biggerFont" type="submit" name="parent_name" value="{{ parent.name }}">
           </form>
           {% endfor %}
       </div>
 
       <hr/>
 
-      <h2 class="fw-light ">Kids</h2>
+      <h2 id='kidSectionTitle'class="fw-light ">Kids</h2>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 ">
 
         {% for kid in kids %}
-        <form class="card shadow-sm m-2" method="POST">
+        <form id="kidNameDisplay" class="card shadow-sm m-2" method="POST">
           {% csrf_token %}
           <input hidden type="number" name="selected_kid" value="{{ kid.id }}">
-          <input class="btn btn-primary my-2" type="submit" name="kid_name" value="{{ kid.name }}">
+          <input id="kidName" class="btn btn-primary my-2 biggerFont" type="submit" name="kid_name" value="{{ kid.name }}">
         </form>
         {% endfor %}
       </div>
@@ -109,7 +110,7 @@
 
     </section>
 
-  </main>
+  
 
   <footer class="text-muted py-5">
     <div class="container">
@@ -118,7 +119,7 @@
       </p>
     </div>
   </footer>
-
+</main>
 
   <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"

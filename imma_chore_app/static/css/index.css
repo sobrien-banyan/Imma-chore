@@ -1,0 +1,148 @@
+/* Full Site styling */
+body{
+    background-color: black;
+    
+}
+a{
+    text-decoration: none;
+}
+/* Home Page styling */
+html{
+    height: 100%;
+}
+#homePageBody{
+    min-height: 100vh;
+    overflow: auto;
+    
+}
+.pageBorderStyle{
+    border: double 3px red;
+}
+#homePageBody{
+    color: limegreen;
+}
+#siteTitle{
+    font-size: 45px;
+    
+}
+#createParentDiv{
+    border: solid 1px rgb(0, 103, 249);
+    background-color:lightgreen;
+    color:black;
+    
+}
+#parentSectionTitle{
+    color: rgb(0, 103, 249);
+}
+#parentNameDisplay{
+    border: solid 1px lightgreen;
+    background-color: rgb(0, 103, 249)
+}
+
+#parentName{
+    background-color: rgb(0, 103, 249);
+    color:black;
+    
+}
+#kidSectionTitle{
+    color:yellow;
+}
+#kidNameDisplay{
+   
+    background-color: rgb(238, 217, 79);
+}
+#kidName{
+    
+    color: black;
+    background-color: rgb(238, 217, 79);
+}
+.biggerFont{
+    font-size: 25px;
+}
+/* Parent Page Styling */
+#parentPageGreeting{
+    color: limegreen;
+    
+}
+
+.createBtns, .infoDisplayBtns{
+    color:rgb(165, 158, 158);
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+}
+/* Create and Select Child Section */
+.redColor{
+    color: rgb(245, 31, 31);
+    
+}
+#createChildBtn{
+    background-color:rgb(241, 69, 69);
+   
+}
+.childNameDisplay{
+    background-color: rgb(241, 69, 69);
+}
+.selectChildBtn, .choreBtns, #deletechoreCardBtn{
+    background-color: black;
+   
+}
+/* Create or Select a chore Section */
+.blueColor{
+    color:rgb(49, 49, 240)
+}
+.choreDisplay{
+    background-color: rgb(64, 64, 241);
+}
+#createChoreBtn{
+    background-color: rgb(64, 64, 241);
+   
+}
+.choreBtns{
+    background-color: black;
+   
+}
+/* Assign chore to day of week section */
+.yellowColor{
+    color:rgb(244, 244, 88);
+    
+}
+#assignChoreBtn{
+    background-color: rgb(244, 244, 88);
+    color:grey;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+.choreAssignDisplay{
+    background-color: rgb(244, 244, 88);
+    color:black;
+    font-size: 1.25rem;
+}
+/* Kid page Styling */
+#kidPageBody{
+    background-color: rgb(35, 35, 35);
+}
+#allowanceEarned{
+    color: rgb(43, 176, 120)
+}
+#kidGreeting{
+    color: rgb(11, 156, 96);
+     /* text-shadow: 0 0 2px rgb(207, 60, 60), 0 0 2px rgb(207, 60, 60),0 0 2px rgb(207, 60, 60), 0 0 2px rgb(207, 60, 60);  */
+}
+#choreInfoDisplay{
+    background-color: rgb(12, 175, 216);
+    border: double 10px rgb(207, 60, 60);
+   
+}
+#completeBtn{
+    background-color: rgb(219, 177, 72);
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: rgb(56, 52, 52)
+
+}
+#tester{
+    width: 125px;
+    height: 100px;
+    background-color: azure;
+}

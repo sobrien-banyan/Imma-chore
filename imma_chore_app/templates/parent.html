@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,11 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}"/>
+        
     <script src="index.js" defer></script>
     <title>Parent</title>
 </head>
 
-<body>
+<body id="parentPageBody">
     <header>
         <div class="navbar navbar-dark bg-dark shadow-sm">
             <div class="container">
@@ -28,17 +31,17 @@
             </div>
         </div>
     </header>
-    <div class="album py-5 bg-light">
+    <div class="album py-5 ">
         <div class="container">
-            <h1>Hi {{ parent.name }}, lets get started!</h1>
+            <h1 id="parentPageGreeting">Hi {{ parent.name }}, lets get started!</h1>
             <br/>
-            <h2>Create or select a kid</h2>
-            <form method="POST">
+            <h2 class="redColor">Create or select a kid</h2>
+            <form class="redColor" method="POST">
 
                 {% csrf_token %}
                 {{ kid_form }}
 
-                <input class="btn btn-primary my-2" type="submit" name="add_child" value="Add child" />
+                <input id='createChildBtn' class="btn my-2 createBtns" type="submit" name="add_child" value="Add child" />
 
 
             </form>
@@ -46,42 +49,42 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 ">
                 {% for kid in kid_list %}
                 {% if selected_kid == kid.id %}
-                <div class="card shadow-sm m-2">
-                <a class="btn btn-primary my-2" href="/parent/{{ parent.id }}/{{ kid.id }}/{{ selected_chore_id }}">
-                    <div > {{ kid.name }} </div></a>
+                <div class="card shadow-sm m-2 childNameDisplay">
+                <a class="btn  my-2 selectChildBtn infoDisplayBtns" href="/parent/{{ parent.id }}/{{ kid.id }}/{{ selected_chore_id }}">
+                    <div> {{ kid.name }} </div></a>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                             <form method=POST>
                                 {% csrf_token %}
 
                                 <input hidden type="number" name="kid_id" value="{{ selected_kid }}">
-                                <input class="btn btn-primary my-2" type="submit" name="delete_kid" value="Delete">
+                                <input class="btn my-2 selectChildBtn infoDisplayBtns" type="submit" name="delete_kid" value="Delete">
                             </form>
                         </div>
                     </div>
                 </div>
                 {% else %}
-                <a class="card shadow-sm m-2" href="/parent/{{ parent.id }}/{{ kid.id }}/{{ selected_chore_id }}">
-                    <div class="btn my-2"> {{ kid.name }} </div> </a>
+                <a class="card shadow-sm m-2 childNameDisplay" href="/parent/{{ parent.id }}/{{ kid.id }}/{{ selected_chore_id }}">
+                    <div class="btn my-2 selectChildBtn infoDisplayBtns"> {{ kid.name }} </div> </a>
                 {% endif %}
                 {% endfor %}
 
 
-                </div>
+            </div>
             <hr />
-            <h2>Create or select a Chore</h2>
-            <form method=POST>
+            <h2 class="blueColor">Create or select a Chore</h2>
+            <form class="blueColor" method=POST>
                 {% csrf_token %}
                 {{ chore_form }}
-                <input class="btn btn-primary my-2" type="submit" name="create_chore" value="Create chore">
+                <input id='createChoreBtn' class="btn  my-2 createBtns" type="submit" name="create_chore" value="Create chore">
             </form>
             <br />
 
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 ">
                 {% for chore in chores %}
                 {% if selected_chore_id == chore.id %}
-                <div class="card shadow-sm m-2">
-                <a class="btn btn-primary my-2" href="/parent/{{ parent.id }}/{{ selected_kid }}/{{ chore.id }}">
+                <div class="card shadow-sm m-2 choreDisplay">
+                <a class="btn choreBtns infoDisplayBtns my-2" href="/parent/{{ parent.id }}/{{ selected_kid }}/{{ chore.id }}">
                     {{ chore.name }} 
                 </a>
                 {% if chore_ready_for_deletion == True %}
@@ -91,15 +94,15 @@
                             {% csrf_token %}
 
                             <input hidden type="number" name="chore_id" value="{{ chore.id }}">
-                            <input class="btn btn-primary my-2" type="submit" name="delete_chore" value="Delete">
+                            <input class="btn my-2 choreBtns infoDisplayBtns" type="submit" name="delete_chore" value="Delete">
                         </form>
                     </div>
                 </div>
                 {% endif %}
             </div>
                 {% else %}
-                <a class="card shadow-sm m-2" href="/parent/{{ parent.id }}/{{ selected_kid }}/{{ chore.id }}">
-                    <div class="btn my-2">{{ chore.name }}</div>
+                <a class="card shadow-sm m-2 choreDisplay" href="/parent/{{ parent.id }}/{{ selected_kid }}/{{ chore.id }}">
+                    <div class="btn my-2 choreBtns infoDisplayBtns">{{ chore.name }}</div>
                 </a>
                 {% endif %}
                 {% endfor %}
@@ -107,7 +110,7 @@
             <br />
 
             <hr />
-            <h1>Assign chore to kid and add which day it will be completed</h1>
+            <h1 class="yellowColor">Assign chore to kid and add which day it will be completed</h1>
             <form method=POST>
                 {% csrf_token %}
                 {{ kid_chore_form }}
@@ -121,7 +124,7 @@
                     <option value="saturday">Saturday</option>
                     <option value="sunday">Sunday</option>
                 </select>
-                <input class="btn btn-primary my-2" type="submit" name="assign_chore" value="Assign chore">
+                <input id='assignChoreBtn' class="btn my-2" type="submit" name="assign_chore" value="Assign chore">
             </form>
             <br />
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -130,7 +133,7 @@
                 {% for kid_chore in selected_kid_chores %}
 
 
-                <div class="card shadow-sm m-2">
+                <div  class="card shadow-sm m-2 choreAssignDisplay">
 
                     <div class="card-body">
                         <p class="card-text">Kid Name: {{ kid_chore.kid.name }}.</p>
@@ -146,7 +149,7 @@
                                     {% csrf_token %}
 
                                     <input hidden type="number" name="chore_number" value="{{ kid_chore.id }}">
-                                    <input class="btn btn-primary my-2" type="submit" name="delete_kid_chore" value="Delete">
+                                    <input id='deletechoreCardBtn'class="btn  my-2 infoDisplayBtns" type="submit" name="delete_kid_chore" value="Delete">
                                 </form>
                             </div>
                         </div>
