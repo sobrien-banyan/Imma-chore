@@ -120,25 +120,29 @@ html{
 }
 /* Kid page Styling */
 #kidPageBody{
-    background-color: rgb(35, 35, 35);
+    background-color:black;;
 }
 #allowanceEarned{
-    color: rgb(43, 176, 120)
+    color: limegreen;
+    font-size: 2rem;
 }
 #kidGreeting{
-    color: rgb(11, 156, 96);
-     /* text-shadow: 0 0 2px rgb(207, 60, 60), 0 0 2px rgb(207, 60, 60),0 0 2px rgb(207, 60, 60), 0 0 2px rgb(207, 60, 60);  */
+    color: rgb(244, 244, 88);
+    text-shadow: 0 0 2px limegreen, 0 0 2px limegreen,0 0 2px limegreen,0 0 2px limegreen ;
+    margin: 2rem;
 }
 #choreInfoDisplay{
-    background-color: rgb(12, 175, 216);
-    border: double 10px rgb(207, 60, 60);
+    background-color: rgb(0, 103, 249);
+    border: double 5px red;
+    font-size: 1.5rem;
    
 }
 #completeBtn{
-    background-color: rgb(219, 177, 72);
+    background-color: limegreen;
     font-size: 1.25rem;
     font-weight: bold;
-    color: rgb(56, 52, 52)
+    color: rgb(56, 52, 52);
+    border: double 5px rgb(244, 244, 88);
 
 }
 #tester{
