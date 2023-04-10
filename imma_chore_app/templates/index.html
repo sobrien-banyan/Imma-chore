@@ -83,11 +83,13 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 ">
 
           {% for parent in parents %}
-          <form id='parentNameDisplay'class="card shadow-sm m-2" method="POST">
+          <div class="p-2">
+          <form id='parentNameDisplay'class="card shadow-sm" method="POST">
             {% csrf_token %}
             <input hidden type="number" name="selected_parent" value="{{ parent.id }}">
-            <input id='parentName' class="btn btn-primary my-2 biggerFont" type="submit" name="parent_name" value="{{ parent.name }}">
+            <input id='parentName' class=" my-2 biggerFont" type="submit" name="parent_name" value="{{ parent.name }}">
           </form>
+        </div>
           {% endfor %}
       </div>
 
@@ -97,11 +99,13 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 ">
 
         {% for kid in kids %}
+        <div class="p-2">
         <form id="kidNameDisplay" class="card shadow-sm m-2" method="POST">
           {% csrf_token %}
           <input hidden type="number" name="selected_kid" value="{{ kid.id }}">
-          <input id="kidName" class="btn btn-primary my-2 biggerFont" type="submit" name="kid_name" value="{{ kid.name }}">
+          <input id="kidName" class=" my-2 biggerFont" type="submit" name="kid_name" value="{{ kid.name }}">
         </form>
+      </div>
         {% endfor %}
       </div>
       </div>
